@@ -1,16 +1,11 @@
-#todo: compare with iterative imputer
-#todo: criterion
-
-import inspect  
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from lightgbm import LGBMClassifier, LGBMRegressor
-from sklearn.preprocessing import OneHotEncoder
-import category_encoders as ce
 from copy import deepcopy
 
-class MissForest():
+
+class MissForest:
     """
     Parameters:
     =============
@@ -32,8 +27,16 @@ class MissForest():
     cat_cols : list,
     A list that specified which columns should not be auto encoded. These columns will not be encoded by the mapping.
     """
-    
-    def __init__(self, clf = None, rgr = None, init_guess : str = 'mean', max_iter : int = 10, n_estimators : int = 100, cat_cols: list = None):
+
+    def __init__(
+        self,
+        clf=None,
+        rgr=None,
+        init_guess: str = "mean",
+        max_iter: int = 10,
+        n_estimators: int = 100,
+        cat_cols: list = None,
+    ):
         self.classifier = clf
         self.regressor = rgr
         self.initial_guess = init_guess
@@ -45,12 +48,13 @@ class MissForest():
         if self.regressor == "RandomForestRegressor":
             self.regressor = RandomForestRegressor(n_estimators=self.n_estimators)
         if self.classifier == None or "LGBMClassifier":
-            self.classifier = LGBMClassifier(n_estimators=self.n_estimators, verbosity=-1)
+            self.classifier = LGBMClassifier(
+                n_estimators=self.n_estimators, verbosity=-1
+            )
         if self.regressor == None or "LGBMRegressor":
             self.regressor = LGBMRegressor(n_estimators=self.n_estimators, verbosity=-1)
 
-
-    def get_missing_cols_rows(self, df : pd.DataFrame):
+    def get_missing_cols_rows(self, df: pd.DataFrame):
         """
         Get the columns and rows that contain missing values, and the observed rows.
 
@@ -63,7 +67,7 @@ class MissForest():
         mis_rows : dictionary, {features : missing rows}.
 
         mis_cols : indexes, columns that have missing values.
-        
+
         obs_rows : dictionary, {features : observed rows}.
         """
         mis_rows = {}
@@ -73,19 +77,18 @@ class MissForest():
             # Find missing value index
             missing = feat_val.isnull()
             mis_index = feat_val[missing].index
-            obs_index = feat_val[missing==0].index
+            obs_index = feat_val[missing == 0].index
             # Missing entry of certain feature
             mis_rows[col] = mis_index
             # Observed entry of certain feature
             obs_rows[col] = obs_index
-        
-        #Sort the features based on the number of missing values.
+
+        # Sort the features based on the number of missing values.
         sorted_mis_cols = df.isnull().sum().sort_values() > 0
         mis_cols = df.columns[sorted_mis_cols]
-        
 
         return mis_rows, obs_rows, mis_cols
-    
+
     def cat_map_and_revmap(self, df):
         """
         Encoding of categorical features.
@@ -130,7 +133,7 @@ class MissForest():
         for col in df.columns:
             try:
                 # mean or median when continuous
-                if self.initial_guess == 'mean':
+                if self.initial_guess == "mean":
                     impute_vals = df[col].mean()
                 else:
                     impute_vals = df[col].median()
@@ -140,7 +143,7 @@ class MissForest():
             df[col].fillna(impute_vals, inplace=True)
         return df
 
-    def fit_transform(self, df, verbose:bool = False):
+    def fit_transform(self, df, verbose: bool = False):
         """
         Train the model, and impute each feature iteratively.
 
@@ -154,10 +157,10 @@ class MissForest():
         Return:
         =========
         df_imp : n * p matrix, the imputed dataset.
-        
+
         """
         mis_row, obs_row, mis_col = self.get_missing_cols_rows(df)
-        mapping, r_mapping= self.cat_map_and_revmap(df)
+        mapping, r_mapping = self.cat_map_and_revmap(df)
         df_imp = self.init_impute(df)
         for col in mapping:
             # If specified, then stop encoding for that column.
@@ -167,7 +170,7 @@ class MissForest():
             df_imp[col] = df_imp[col].astype(int)
 
         for i in range(self.max_iter):
-            if(verbose):
+            if verbose:
                 print(f"Iteration: {i+1}/{self.max_iter}")
             for col in mis_col:
                 # Determine estimator by data type
@@ -177,7 +180,7 @@ class MissForest():
                 else:
                     print(f"Continuous: {col} ")
                     estimator = deepcopy(self.regressor)
-                if(verbose):
+                if verbose:
                     print(f"Using {estimator}")
                 x_obs = df_imp.drop(col, axis=1).loc[obs_row[col]]
                 y_obs = df_imp[col].loc[obs_row[col]]
@@ -196,12 +199,3 @@ class MissForest():
             df_imp[col].replace(r_mapping[col], inplace=True)
 
         return df_imp
-            
-
-
-
-# if __name__ == "__main__":
-#     df = pd.read_csv("../Example/data/original.csv")
-#     imputer = MissForest()
-#     df_imputed = imputer.fit_transform(df)
-#     df_imputed.to_csv("Imputed.csv")

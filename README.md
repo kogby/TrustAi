@@ -9,18 +9,20 @@
 
 This project focuses on two major themes: **Data Quality (DQ)** and **Explainable AI (XAI)**. The goal is to automate workflows, reduce data processing costs, and improve reliability.
 
-### Data Quality (DQ)
+### Data Quality (DQ) [DQ Repository](https://github.com/kogby/EDASH)
+
 - Implements parametric and non-parametric imputation methods to enhance data usability.
 - Evaluates imputation results using **Differential Entropy**, **Canonical Relative Entropy**, and correlation-based metrics.
-- For more details about DQ: [EDASH Repository](https://github.com/forbes110/EDASH)
 
 ### Explainable AI (XAI)
+
 - Combines **Active Learning** for user interaction and adaptability to customized data.
 - Ensures process stability and parameter reduction with **Knowledge Distillation**.
 - Enhances model interpretability using **SHAP** (SHapley Additive exPlanations) and **Counterfactual Explanations** to assist decision-making.
 
 ### Additional Resources
-- [Presentation PPT](./專題簡報.pdf)  
+
+- [Presentation PPT](./專題簡報.pdf)
 - [Poster](./image/Poster.png)
 
 ---
@@ -28,9 +30,15 @@ This project focuses on two major themes: **Data Quality (DQ)** and **Explainabl
 ## Demo
 
 ### Demo Video
-[View Demo Video]()
+
+[View Demo Video](https://drive.google.com/file/d/1sgwQ_5CiMUDoXxHa0AwjUeCnWirH506E/view?usp=sharing)
+
+<video src="https://drive.google.com/file/d/1sgwQ_5CiMUDoXxHa0AwjUeCnWirH506E/view?usp=sharing" controls width="640" height="360">
+    無法播放影片？請下載到本地查看。
+</video>
 
 ### Website Preview
+
 ![Upload Page Screenshot](./image/upload_page.png)
 
 ---
@@ -38,10 +46,12 @@ This project focuses on two major themes: **Data Quality (DQ)** and **Explainabl
 ## Setup Instructions
 
 ### Prerequisites
+
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 - Node.js & npm (for frontend)
 
 ### 1. Frontend Setup
+
 The frontend runs on `http://localhost:5173/`.
 
 ```bash
@@ -51,6 +61,7 @@ npm run dev
 ```
 
 ### 2. Backend & Database Setup
+
 The backend is containerized using Docker Compose.
 
 1. Start Docker Desktop.
@@ -64,6 +75,7 @@ docker compose up --build
 ---
 
 ## Notes
+
 - **CORS Policy** is handled using a Vite proxy configuration.
 - If Docker is already set up, you can restart the backend without `--build`:
 
@@ -74,6 +86,7 @@ docker compose up
 ---
 
 ### Future Improvements
+
 - Add unit testing for both frontend and backend.
 - Integrate a CI/CD pipeline for automated deployments.
 - Enhance database query optimization for large datasets.
@@ -81,6 +94,7 @@ docker compose up
 ---
 
 ## Contact
+
 For questions or issues, feel free to raise a GitHub issue or contact the project maintainers.
 
 ---
