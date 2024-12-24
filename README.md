@@ -31,11 +31,7 @@ This project focuses on two major themes: **Data Quality (DQ)** and **Explainabl
 
 ### Demo Video
 
-[View Demo Video](https://drive.google.com/file/d/1sgwQ_5CiMUDoXxHa0AwjUeCnWirH506E/view?usp=sharing)
-
-<video src="https://drive.google.com/file/d/1sgwQ_5CiMUDoXxHa0AwjUeCnWirH506E/view?usp=sharing" controls width="640" height="360">
-    無法播放影片？請下載到本地查看。
-</video>
+[![Demo Video](./image/logo.png)](https://youtu.be/w3JulScsLXU)
 
 ### Website Preview
 
