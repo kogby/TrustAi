@@ -1,24 +1,32 @@
-# TAI DQ Website
+# TAI DQ
 
-**Frontend:** React, Tailwind  
-**Backend:** Django, PostgreSQL (containerized with Docker)
+[![Demo Video](./image/logo.png)](https://youtu.be/w3JulScsLXU)
 
----
+#### (Click the image for demo video!)
 
-## Project Overview
+# Project Overview
 
-This project focuses on two major themes: **Data Quality (DQ)** and **Explainable AI (XAI)**. The goal is to automate workflows, reduce data processing costs, and improve reliability.
+TAI DQ focuses on two major themes: **Data Quality (DQ)** and **Explainable AI (XAI)**. The project aims to automate workflows, reduce data processing costs, and enhance reliability.
 
-### Data Quality (DQ) [DQ Repository](https://github.com/kogby/EDASH)
+### Data Quality (DQ)
 
-- Implements parametric and non-parametric imputation methods to enhance data usability.
-- Evaluates imputation results using **Differential Entropy**, **Canonical Relative Entropy**, and correlation-based metrics.
+[Explore the DQ Repository](https://github.com/kogby/EDASH)
+
+- Implements **parametric** and **non-parametric imputation methods** to improve data usability.
+- Evaluates imputation results using:
+  - **Differential Entropy**
+  - **Canonical Relative Entropy**
+  - Correlation-based metrics
 
 ### Explainable AI (XAI)
 
-- Combines **Active Learning** for user interaction and adaptability to customized data.
-- Ensures process stability and parameter reduction with **Knowledge Distillation**.
-- Enhances model interpretability using **SHAP** (SHapley Additive exPlanations) and **Counterfactual Explanations** to assist decision-making.
+- Incorporates **Active Learning** for interactive and adaptive workflows.
+- Ensures process stability and reduces parameters through **Knowledge Distillation**.
+- Enhances model interpretability with:
+  - **SHAP (SHapley Additive exPlanations)**
+  - **Counterfactual Explanations**
+
+These methods assist in informed and transparent decision-making.
 
 ### Additional Resources
 
@@ -27,28 +35,23 @@ This project focuses on two major themes: **Data Quality (DQ)** and **Explainabl
 
 ---
 
-## Demo
-
-### Demo Video
-
-[![Demo Video](./image/logo.png)](https://youtu.be/w3JulScsLXU)
-
-### Website Preview
+# Website Preview
 
 ![Upload Page Screenshot](./image/upload_page.png)
 
----
+- **Frontend:** React, Tailwind CSS
+- **Backend:** Django, PostgreSQL (containerized with Docker)
 
 ## Setup Instructions
 
 ### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- Node.js & npm (for frontend)
+- [Node.js & npm](https://nodejs.org/) (for frontend)
 
-### 1. Frontend Setup
+### Frontend Setup
 
-The frontend runs on `http://localhost:5173/`.
+Run the frontend on `http://localhost:5173/`:
 
 ```bash
 cd frontend
@@ -56,9 +59,9 @@ npm install
 npm run dev
 ```
 
-### 2. Backend & Database Setup
+### Backend & Database Setup
 
-The backend is containerized using Docker Compose.
+The backend is containerized using Docker Compose. To set it up:
 
 1. Start Docker Desktop.
 2. Build and start the backend and database:
@@ -68,12 +71,9 @@ cd backend
 docker compose up --build
 ```
 
----
+#### Restarting Backend (Optional)
 
-## Notes
-
-- **CORS Policy** is handled using a Vite proxy configuration.
-- If Docker is already set up, you can restart the backend without `--build`:
+If Docker is already set up, restart the backend without rebuilding:
 
 ```bash
 docker compose up
@@ -81,18 +81,12 @@ docker compose up
 
 ---
 
-### Future Improvements
+## Notes
 
-- Add unit testing for both frontend and backend.
-- Integrate a CI/CD pipeline for automated deployments.
-- Enhance database query optimization for large datasets.
-
----
+- **CORS Policy**: Configured using a Vite proxy.
 
 ## Contact
 
-For questions or issues, feel free to raise a GitHub issue or contact the project maintainers.
+For questions or issues, raise a GitHub issue or contact the project maintainers.
 
----
-
-Enjoy exploring the TAI DQ 🚀
+Enjoy exploring TAI DQ! 🚀
